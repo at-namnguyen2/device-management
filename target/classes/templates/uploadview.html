@@ -1,0 +1,221 @@
+        <form id="edit-detail-form" novalidate>
+                <div class="row">
+                    <div class="col-md-8 ">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom01">Device Name</label>
+                                <input name="devicename" type="text" class="form-control" id="validationCustom01"
+                                       placeholder="Product Name" value="" required disabled>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom02">Product Brand</label>
+                                <input name="catalogname" type="text" class="form-control" id="validationCustom02" placeholder="Last name"
+                                       value="" required>
+                            </div>
+                        </div>
+                        <div class="row">                      
+                            <div class="col-md-3 mb-3">
+                                <label for="validationCustom04">Price</label>
+                                <input type="text" class="form-control" id="validationCustom04" placeholder="$ 250"
+                                       required>
+                                <div class="invalid-feedback">
+                                    Please provide a valid price.
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="sku">SKU</label>
+                                <input type="text" class="form-control" id="sku" placeholder="sku-1029-5998" required>
+                                <div class="invalid-feedback">
+                                    Please provide a valid sku.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="productDetails">Product Details</label>
+                            <textarea class="form-control p-t-40 editor" id="productDetails"
+                                      placeholder="Write Something..." rows="17" required></textarea>
+                            <div class="invalid-feedback">
+                                Please provide a product details.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="tags">Product Tags</label><br>
+                            <input type="text" class="tags-input"  id="tags" placeholder="Add New"
+                                   value="Amsterdam,Washington,Sydney,Beijing,Cairo" required>
+                        </div>
+                        <script>
+                            // Example starter JavaScript for disabling form submissions if there are invalid fields
+                            (function () {
+                                "use strict";
+                                window.addEventListener("load", function () {
+                                    var form = document.getElementById("edit-detail-form");
+                                    form.addEventListener("submit", function (event) {
+                                        if (form.checkValidity() == false) {
+                                            event.preventDefault();
+                                            event.stopPropagation();
+                                        }
+                                        form.classList.add("was-validated");
+                                        var editorElement = document.getElementById("productDetails");
+                                        if (editorElement.value == '') {
+                                            editorElement.parentNode.classList.add("is-invalid");
+                                            editorElement.parentNode.classList.remove("is-valid");
+                                        } else {
+                                            editorElement.parentNode.classList.remove("is-invalid");
+                                            editorElement.parentNode.classList.add("is-valid");
+                                        }
+
+                                    }, false);
+                                }, false);
+                            }());
+                        </script>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card mt-4">
+                            <h6 class="card-header white">Publish Box</h6>
+                            <div class="card-body text-success">
+
+                                <div class="custom-control custom-checkbox mb-3">
+                                    <input type="checkbox" class="custom-control-input" id="customControlValidation1" required>
+                                    <label class="custom-control-label" for="customControlValidation1">Check this custom checkbox</label>
+                                    <div class="invalid-feedback">Example invalid feedback text</div>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent">
+                                <button class="btn btn-primary" type="submit">Publish</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            
+            
+            
+                <form id="edit-detail-form" novalidate>
+                <div class="row">
+                    <div class="col-md-8 ">
+                      <div class="row">
+                            <div class="col-md-9 mb-3">
+                              <input type="text" hidden="" class="form-control" name="idDevice" id="id_device" placeholder=""
+                                       required disabled>
+                            <input type="text" hidden="" class="form-control" name="id" id="id_detaildevice" placeholder=""
+                                       required >
+                            
+                                <label for="deviceName">Device Name</label>
+                                <input type="text" class="form-control" name="devicename" id="deviceName" placeholder="fill device name"
+                                       required disabled>
+                                <div class="invalid-feedback">
+                           Please 
+                                </div>
+                            </div>
+                        	
+                            <div class="col-md-3 mb-3">
+                                <label for="catalogName">Category</label>
+                                <input type="text" class="form-control" name="catalogName" id="catalogName" disabled placeholder="" required>
+                                <div class="invalid-feedback" >
+                                   Please 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <label for="productId">PRODUCT ID</label>
+                                <input type="text" name="productId" class="form-control" id="productId"
+                                       placeholder="Product Name" value="" required>
+                                       <div class="invalid-feedback" >
+                                    Please provide a valid sku.
+                                </div>
+                            </div>
+                  
+                        </div>                      
+                          <div class="row">
+                   <div class="card-bodyb-b  col-md-6">
+                            <p>Status</p>
+                            <ul class="list-group">                             
+                                <li class="list-group-item 2.50rem font-weight-bold text-primary">
+                                    Normal
+                                    <div class="material-switch float-right">
+                                        <input id="SwitchStatusNormal" name="statusN" type="checkbox" >
+                                        <label for="SwitchStatusNormal" class="bg-primary"></label>
+                                    </div>
+                                </li>                            
+                                <li class="list-group-item 2.50rem font-weight-bold text-warning">
+                                    Error
+                                    <div class="material-switch float-right">
+                                        <input id="SwitchStatusError" name="statusE" type="checkbox">
+                                        <label for="SwitchStatusError" class="bg-warning"></label>
+                                    </div>
+                                </li>
+                                <li class="list-group-item 2.50rem font-weight-bold text-danger">
+                                    Break
+                                    <div class="material-switch float-right">
+                                        <input id="SwitchStatusBreak" name="statusB" type="checkbox">
+                                        <label for="SwitchStatusBreak" class="bg-danger"></label>
+                                    </div>
+                                </li>
+                            </ul>
+                </div>
+                     <div class="card-bodyb-b  col-md-6">
+                            <ul class="list-group">                             
+                                <li class="list-group-item 2.50rem font-weight-bold text-success">
+                                    Working
+                                    <div class="material-switch float-right">
+                                        <input id="SwitchWorking"  name="working" type="checkbox" disabled>
+                                        <label for="SwitchWorking" class="bg-success"></label>
+                                    </div>
+                                </li>                                           
+                            </ul>
+                            <div id="detail-icon" style="font-size:124px;" class="detail-icon icon  mt-2 "><span class="circle"></span></div>
+                        </div>
+                        </div>
+                        <!-- <div class="form-group"> -->
+                            <!-- <label for="productDetails">Product Details</label> -->
+                           
+                        <!-- </div> -->
+           
+                        <script>
+                            // Example starter JavaScript for disabling form submissions if there are invalid fields
+                            (function () {
+                                "use strict";
+                                window.addEventListener("load", function () {
+                                    var form = document.getElementById("edit-detail-form");
+                                    form.addEventListener("submit", function (event) {
+                                        if (form.checkValidity() == false) {
+                                       
+                                            event.preventDefault();
+                                            event.stopPropagation();
+                                        }
+                                     	alert();
+                                        form.classList.add("was-validated");
+                                        var editorElement = document.getElementById("productId");
+                                        if (editorElement.value == '') {
+                                            editorElement.parentNode.classList.add("is-invalid");
+                                            editorElement.parentNode.classList.remove("is-valid");
+                                        } else {
+                                            editorElement.parentNode.classList.remove("is-invalid");
+                                            editorElement.parentNode.classList.add("is-valid");
+                           
+                                        }
+
+                                    }, false);
+                                }, false);
+                            }());
+                        </script>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card mt-4">
+                            <h6 class="card-header white">Update Box</h6>
+                            <div class="card-body text-success">
+
+                                <div class="custom-control custom-checkbox mb-3">
+                                    <input type="checkbox" class="custom-control-input" id="sumitUpdate" required>
+                                    <label class="custom-control-label" for="sumitUpdate">Check this custom checkbox</label>
+                                    <div class="invalid-feedback"></div>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent">
+                                <button  id="sumitUpdate1"  class="btn btn-primary" type="submit">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>

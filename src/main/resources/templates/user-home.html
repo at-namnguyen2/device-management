@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link th:href="@{/assets/css/app.css}" rel="stylesheet" />
+<link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+<link rel="icon" th:href="@{/assets/img/basic/favicon.ico}"
+	type="image/x-icon">
+<script th:src="@{/assets/js/jquery-3.3.1.min.js}"></script>
+<script type="text/javascript"
+	th:src="@{/assets/js/jquery.serializejson.js}"></script>
+
+<script th:src="@{/assets/js/userprofile.js}"></script>
+
+<title>Paper</title>
+<!-- CSS -->
+<style>
+.loader {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #F5F8FA;
+	z-index: 9998;
+	text-align: center;
+}
+
+.plane-container {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+}
+</style>
+</head>
+<body class="light">
+	<!-- Pre loader -->
+	<div id="loader" class="loader">
+		<div class="plane-container">
+			<div class="preloader-wrapper small active">
+				<div class="spinner-layer spinner-blue">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+				</div>
+
+				<div class="spinner-layer spinner-red">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+				</div>
+
+				<div class="spinner-layer spinner-yellow">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+				</div>
+
+				<div class="spinner-layer spinner-green">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="app">
+		<div class="sidebar-offcanvas-desktop">
+			<aside class="main-sidebar fixed offcanvas shadow">
+				<section class="sidebar">
+					<div class="w-80px mt-3 mb-3 ml-3">
+						<img th:src="@{/assets/img/basic/logo.png}" alt="">
+					</div>
+					<div class="relative">
+						<a data-toggle="collapse" href="#userSettingsCollapse"
+							role="button" aria-expanded="false"
+							aria-controls="userSettingsCollapse"
+							class="btn-fab btn-fab-sm fab-right fab-top btn-primary shadow1 ">
+							<i class="icon icon-cogs"></i>
+						</a>
+						<div class="user-panel p-3 light mb-2">
+							<div>
+								<div class="float-left image">
+									<img class="user_avatar" th:src="@{/assets/img/dummy/u2.png}"
+										alt="User Image">
+								</div>
+								<div class="float-left info">
+									<h6 class="font-weight-light mt-2 mb-1 ">Alexander Pierce</h6>
+									<a href="#"><i class="icon-circle text-primary blink"></i>
+										Online</a>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+							<div class="collapse multi-collapse" id="userSettingsCollapse">
+								<div class="list-group mt-3 shadow">
+									<a href="index.html"
+										class="list-group-item list-group-item-action "> <i
+										class="mr-2 icon-umbrella text-blue"></i>Profile
+									</a> <a href="#" class="list-group-item list-group-item-action"><i
+										class="mr-2 icon-cogs text-yellow"></i>Settings</a> <a
+										href="page_change_password.html"
+										class="list-group-item list-group-item-action"><i
+										class="mr-2 icon-security text-purple"></i>Change Password</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<ul class="sidebar-menu">
+						<li class="header"><strong></strong></li>
+						<li class="treeview"><a href="#"> <i
+								class="icon icon-sailing-boat-water purple-text s-18"></i> <span>Home</span>
+						</a></li>
+
+						<li class="treeview"><a href="#"><i
+								class="icon icon-account_box light-green-text s-18"></i>Edit
+								Profile</a></li>
+						<li class="treeview no-b"><a href="#"> <i
+								class="icon icon-security light-green-text s-18"></i> <span>Change
+									Password</span> <span class="badge r-3 badge-success pull-right"></span>
+						</a></li>
+						<li class="treeview"><a href="#"> <i
+								class="icon icon icon-package blue-text s-18"></i> <span>Logout</span>
+								<span class="badge r-3 badge-primary pull-right"></span>
+						</a></li>
+
+
+
+
+					</ul>
+				</section>
+			</aside>
+			<!--Sidebar End-->
+			<div class="has-sidebar-left">
+				<div class="pos-f-t">
+					<div class="collapse" id="navbarToggleExternalContent">
+						<div class="bg-dark pt-2 pb-2 pl-4 pr-2">
+							<div class="search-bar">
+								<input
+									class="transparent s-24 text-white b-0 font-weight-lighter w-128 height-50"
+									type="text" placeholder="start typing...">
+							</div>
+							<a href="#" data-toggle="collapse"
+								data-target="#navbarToggleExternalContent" aria-expanded="false"
+								aria-label="Toggle navigation"
+								class="paper-nav-toggle paper-nav-white active "><i></i></a>
+						</div>
+					</div>
+				</div>
+				<div class="sticky">
+					<div
+						class="navbar navbar-expand navbar-dark d-flex justify-content-between bd-navbar blue accent-3">
+						<div class="relative">
+							<a href="#" data-toggle="offcanvas"
+								class="paper-nav-toggle pp-nav-toggle"> <i></i>
+							</a>
+						</div>
+						<!--Top Menu Start -->
+						<div class="navbar-custom-menu p-t-10">
+							<ul class="nav navbar-nav">
+
+								<!-- notification -->
+								<li class="dropdown custom-dropdown notifications-menu"><a
+									href="#" class=" nav-link" data-toggle="dropdown"
+									aria-expanded="false"> <i class="icon-notifications "></i>
+										<span
+										class="count-notify badge badge-danger badge-mini rounded-circle"></span>
+								</a>
+									<ul class="dropdown-menu">
+										<li class="count-header header">You have 10 notifications</li>
+										<li>
+											<!-- inner menu: contains the actual data -->
+											<ul class="menu">
+												<li class="count-content"></li>
+											</ul>
+										</li>
+										<li class="footer p-2 text-center"><a href="#">View
+												all</a></li>
+									</ul></li>
+								<!-- User Account-->
+								<li class="dropdown custom-dropdown user user-menu"><a
+									href="#" class="nav-link" data-toggle="dropdown"> <img
+										class="user-image data-avatar" alt="User Image"> <i
+										class="icon-more_vert "></i>
+								</a>
+									<div class="dropdown-menu p-4">
+										<div class="row box justify-content-between my-4">
+
+											<div class="col">
+												<a href="#"> <i
+													class="icon-beach_access pink lighten-1 avatar  r-5"></i>
+													<div class="pt-1">Profile</div>
+												</a>
+											</div>
+											<div class="col">
+												<a id="change-pass"> <i
+													class="icon-security purple lighten-2 avatar  r-5"></i>
+													<div class="pt-1">Change Password</div>
+												</a>
+											</div>
+											<div class="col">
+												<a href="/logout"> <i
+													class="icon-perm_data_setting indigo lighten-2 avatar  r-5"></i>
+													<div class="pt-1">Logout</div>
+												</a>
+											</div>
+										</div>
+									</div></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="page has-sidebar-left">
+				<div>
+					<header class="blue accent-3 relative">
+						<div class="container-fluid text-white">
+							<div class="row p-t-b-10 ">
+								<div class="col">
+									<div class="pb-3">
+										<div class="image mr-3  float-left">
+											<img class="user_avatar no-b no-p data-avatar"
+												alt="User Image">
+										</div>
+										<div>
+											<h6 id="fullname" class="p-t-10 fullname">Alexander
+												Pierce</h6>
+											<div class="email">alexander@paper.com</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<ul class="nav nav-material nav-material-white responsive-tab"
+									id="v-pills-tab" role="tablist">
+									<li><a class="nav-link active" id="v-pills-home-tab"
+										data-toggle="pill" href="#v-pills-home" role="tab"
+										aria-controls="v-pills-home"><i class="icon icon-home2"></i>Home</a>
+									</li>
+
+									<li><a class="nav-link" id="v-pills-edit-tab"
+										data-toggle="pill" href="#v-pills-edit" role="tab"
+										aria-controls="v-pills-edit" aria-selected="false"><i
+											class="icon icon-cog"></i>Edit Profile</a></li>
+									<li><a class="nav-link" id="v-pills-timeline-tab"
+										data-toggle="pill" href="#v-pills-timeline" role="tab"
+										aria-controls="v-pills-timeline" aria-selected="false"><i
+											class="icon icon-security"></i>Change Password</a></li>
+									<li><a class="nav-link" id="v-pills-request-tab"
+										data-toggle="pill" href="#v-pills-request" role="tab"
+										aria-controls="v-pills-request" aria-selected="false"><i
+											class="icon icon-history"></i>My Request</a></li>
+								</ul>
+							</div>
+
+						</div>
+					</header>
+
+					<div class="container-fluid animatedParent animateOnce my-3">
+						<div class="animated fadeInUpShort">
+							<div class="tab-content" id="v-pills-tabContent">
+								<div class="tab-pane fade show active" id="v-pills-home"
+									role="tabpanel" aria-labelledby="v-pills-home-tab">
+									<div class="row">
+										<div class="col-md-3">
+											<div class="card ">
+
+												<ul class="list-group list-group-flush">
+													<li class="list-group-item"><i
+														class="icon icon-mobile text-primary"></i><strong
+														class="s-12 ">Team</strong> <span
+														class="float-right s-12 team">+91 333470 456 99</span></li>
+													<li class="list-group-item"><i
+														class="icon icon-mail text-success"></i><strong
+														class="s-12 ">Phone</strong> <span
+														class="float-right s-12 phone">abc@paper.com</span></li>
+													<li class="list-group-item"><i
+														class="icon icon-address-card-o text-warning"></i><strong
+														class="s-12 ">Birthday</strong> <span
+														class="float-right s-12 dateOfBirth">New York, USA</span></li>
+													<li class="list-group-item"><i
+														class="icon icon-web text-danger"></i> <strong
+														class="s-12 ">Address</strong> <span
+														class="float-right s-12 address">pappertemplate.com</span></li>
+												</ul>
+											</div>
+											<div class="card mt-3 mb-3">
+												<div class="card-header bg-white">
+													<strong class="card-title">SA Contacts</strong>
+
+												</div>
+												<ul class="no-b firstSAContact">
+													<li class="list-group-item"><a href="">
+															<div class="image mr-3  float-left">
+																<img class="user_avatar"
+																	th:src="@{/assets/img/dummy/u3.png}" alt="User Image">
+															</div> <!-- sa contact1 -->
+															<h6 class="p-t-10 saname1">Alexander Pierce</h6> <span
+															class="saphone1"><i class="icon-mobile-phone"></i>+92
+																333470963</span>
+													</a></li>
+												</ul>
+
+												<div class="card-header bg-white">
+													<strong class="card-title">Other</strong>
+												</div>
+												<div class="SaOther"></div>
+
+											</div>
+
+										</div>
+										<div class="col-md-9">
+
+
+											<div class="row">
+												<div class="col-lg-4">
+													<div class="card r-3">
+														<div class="p-4">
+															<div class="float-right">
+																<span class="icon-award text-light-blue s-48"></span>
+															</div>
+															<div class="counter-title">Devices Received</div>
+															<h5 class=" mt-3 receiveddv">0</h5>
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-4">
+													<div class="card r-3">
+														<div class="p-4">
+															<div class="float-right">
+																<span class="icon-orders s-48"></span>
+															</div>
+															<div class="counter-title ">Devices Working</div>
+															<h5 class=" mt-3 workingdv">0</h5>
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-4">
+													<div class="white card">
+														<div class="p-4">
+															<div class="float-right">
+																<span class="icon-stop-watch3 s-48"></span>
+															</div>
+															<div class="counter-title">Last Update</div>
+															<h5 class=" mt-3 lastupdate"></h5>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<div class="row my-3">
+												<!-- bar charts group -->
+												<div class="col-md-12">
+													<div class="card">
+														<div class=" col-12 table-responsive">
+															<table class="table-device table table-striped ">
+																<thead>
+																	<tr class="no-b">
+																		<th>DEVICES NAME</th>
+																		<th>PRODUCT ID</th>
+																		<th>DATE RECEIVED</th>
+																		<th>PRICE (USD)</th>
+																		<th>Return Device</th>
+
+																	</tr>
+																</thead>
+																<tbody class="tabledevice ">
+																	<!-- data device -->
+																</tbody>
+															</table>
+														</div>
+													</div>
+													<!-- /bar charts group -->
+
+
+												</div>
+
+											</div>
+										</div>
+									</div>
+									<!--Add New Message Fab Button-->
+									<a id="newrequest" href="modalRequest" data-toggle="modal"
+										data-target="#modalRequest"
+										class="btn-fab btn-fab-md fab-right fab-right-bottom-fixed shadow ">
+										<span class="badge badge-success">Allocation Device</span>
+
+									</a>
+
+								</div>
+								<div class="tab-pane fade" id="v-pills-request" role="tabpanel"
+									aria-labelledby="v-pills-request-tab">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="card no-b">
+												<div class="card-header white b-0 p-3">
+													<h4 class="card-title">My Requests</h4>
+												</div>
+												<div class="collapse show" id="invoiceCard">
+													<div class="card-body p-0">
+														<div class="table-responsive">
+															<table id="recent-orders"
+																class="table table-hover mb-0 ps-container ps-theme-default">
+																<thead class="bg-light">
+																	<tr>
+																		<th>Type</th>
+																		<th>Content</th>
+																		<th>Date Update</th>
+																		<th>Status</th>
+																	</tr>
+																</thead>
+																<tbody class="tablerequest">
+																	<!-- 		"<tr><td>"+type+"</td><td><a href=\"#\">INV-281281</a></td><td>"+updateDate+"</td><td><span class=\"badge badge-success\">"+status+"</span></td></tr>" -->
+																</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+								<div class="tab-pane fade" id="v-pills-timeline" role="tabpanel"
+									aria-labelledby="v-pills-timeline-tab">
+									<div class="container-fluid animatedParent animateOnce">
+										<div class="animated fadeInUpShort">
+											<div class="row my-3">
+												<div class="col-md-7  offset-md-2">
+													<form action="#" id="demo-form2">
+														<div class="card no-b  no-r">
+															<div class="card-body">
+
+																<div class="form-row">
+																	<div class="form-group col-md-8">
+																		<label for="inputPassword4" class="col-form-label">Current
+																			Password</label> <input type="password" class="form-control"
+																			id="inputPassword4" name="passwordCurrent"
+																			placeholder="Enter Current Password">
+
+																	</div>
+
+																	<div class="form-group col-md-8">
+																		<label for="inputPassword5" class="col-form-label">New
+																			Password</label> <input type="password" class="form-control"
+																			id="inputPassword5" name="newPassword"
+																			placeholder="Enter New Password">
+
+																	</div>
+																	<br>
+
+																	<div class="form-group col-md-8">
+																		<label for="inputPassword7" class="col-form-label">Confirm
+																			Password</label> <input type="password" class="form-control"
+																			id="inputPassword7" name="newMatchingPassword"
+																			placeholder="Enter Confirm Password">
+
+
+																	</div>
+																	<div class="col-md-12 col-xs-12 btn msg-error"
+																		style="font-size: 13px"></div>
+
+																	<!-- <div class="form-group">
+															<div class="col-md-3"></div>
+															<div class="col-md-6"
+																style="font-size: 13px">
+																<div class="col-md-12 col-xs-12 btn msg-error" style="font-size: 13px">
+																</div>
+																</div>
+									</div> -->
+
+
+
+																</div>
+
+
+															</div>
+															<hr>
+
+															<div class="card-body">
+																<button type="button" id="checkPassword"
+																	class="btn btn-success">Submit</button>
+
+
+
+															</div>
+
+														</div>
+													</form>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+								<div class="tab-pane fade" id="v-pills-edit" role="tabpanel"
+									aria-labelledby="v-pills-edit-tab">
+									<div class="container-fluid animatedParent animateOnce">
+										<div class="animated fadeInUpShort">
+											<div class="row my-3">
+												<div class="col-md-7  offset-md-2">
+													<form id="form-profile" action="#">
+														<div class="card no-b  no-r">
+															<div class="card-body">
+																<h5 class="card-title">About Profile</h5>
+																<div class="form-row">
+																	<div class="col-md-8">
+																		<div class="form-group m-0">
+																			<input hidden="" id="id" name="id" placeholder="id"
+																				class="form-control r-0 light s-12 id" type="number">
+																		</div>
+
+																		<div class="form-group m-0">
+																			<label for="name" class="col-form-label s-12 ">EMPLOYEE
+																				NAME</label> <input id="name" name="fullname"
+																				placeholder="Enter User Name"
+																				class="form-control r-0 light s-12 fullname"
+																				type="text">
+																		</div>
+
+																		<div class="form-row">
+																			<div class="form-group col-6 m-0">
+																				<label for="cnic" class="col-form-label s-12"><i
+																					class="icon-fingerprint"></i>TEAM</label> <input id="cnic"
+																					name="team" placeholder="Enter Team Joined"
+																					class="form-control r-0 light s-12 date-picker team"
+																					type="text">
+																			</div>
+
+
+																			<div class="form-group col-6 m-0">
+																				<label for="dob" class="col-form-label s-12"><i
+																					class="icon-calendar mr-2"></i>DATE OF BIRTH</label> <input
+																					id="dob" name="birthDay"
+																					placeholder="Select Date of Birth"
+																					class="form-control r-0 light s-12 date-time-picker dateOfBirth"
+																					type="text"
+																					data-options="{&quot;timepicker&quot;:false, &quot;format&quot;:&quot;Y-m-d&quot;}"
+																					value="2018/06/01">
+
+																			</div>
+																		</div>
+
+																		<div class="form-group m-0">
+																			<label for="dob" class="col-form-label s-12 ">GENDER</label>
+																			<br>
+																			<div
+																				class="custom-control custom-radio custom-control-inline">
+																				<input type="radio" id="male" name="genderM"
+																					class="custom-control-input genderM"> <label
+																					class="custom-control-label m-0 " for="male">Male</label>
+																			</div>
+																			<div
+																				class="custom-control custom-radio custom-control-inline">
+																				<input type="radio" id="female" name="genderF"
+																					class="custom-control-input genderF"> <label
+																					class="custom-control-label m-0 " for="female">Female</label>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="col-md-3 offset-md-1">
+																		<input hidden id="file" name="file" />
+
+																		<div class="dropzone dropzone-file-area pt-4 pb-4"
+																			id="fileUpload">
+
+																			<div class="dz-default dz-message ">
+																				<span>Drop A passport size image of user</span>
+																				<div>You can also click to open file browser</div>
+																			</div>
+
+																			<div class="dz-image">
+																				<img class="data-avatar-edit" data-dz-thumbnail="" alt=""
+																					src="">
+																			</div>
+																		</div>
+
+																	</div>
+
+																</div>
+
+																<div class="form-row mt-1">
+																	<div class="form-group col-4 m-0">
+																		<label for="email" class="col-form-label s-12"><i
+																			class="icon-envelope-o mr-2"></i>Email</label> <input
+																			id="email" name="email" placeholder="user@email.com"
+																			class="form-control r-0 light s-12 email" type="text">
+																	</div>
+
+																	<div class="form-group col-4 m-0">
+																		<label for="phone" class="col-form-label s-12"><i
+																			class="icon-phone mr-2"></i>Phone</label> <input id="phone"
+																			name="phone" placeholder="05112345678"
+																			class="form-control r-0 light s-12 phone" type="text">
+																	</div>
+
+
+																</div>
+																<div class="form-row">
+																	<div class="form-group col-9 m-0">
+																		<label for="address" class="col-form-label s-12">Address</label>
+																		<input type="text" name="address"
+																			class="form-control r-0 light s-12 address"
+																			id="address" placeholder="Enter Address">
+																	</div>
+																</div>
+															</div>
+															<hr>
+
+															<div class="card-body">
+																<span id="butonsave" type="submit"
+																	class="btn btn-primary btn-lg saveprofile"><i
+																	class="icon-save mr-2 "></i>Save Profile</span>
+																<div role="alert"
+																	class="alert alert-warning warning-edit" hidden="">
+																	<strong>Warning!</strong> Your update info request is
+																	pending!
+																</div>
+															</div>
+
+														</div>
+													</form>
+
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			
+			   <button class="toast-save btn btn-warning btn-lg toast-action"
+        data-title="Notification"
+        data-message="Save Success"
+        data-type="success"
+        data-position-class="toast-top-left" hidden="">
+    Success Toast</button>
+    
+			<div class="modal fade show" id="modalRequest" tabindex="-1"
+				role="dialog" aria-labelledby="modalRequest">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content b-0">
+						<div class="modal-header r-0 bg-primary">
+							<h6 class="modal-title text-white" id="RequestLabel">New
+								Devices</h6>
+							<a href="#" data-dismiss="modal" aria-label="Close"
+								class="paper-nav-toggle paper-nav-white active"><i></i></a>
+						</div>
+						<div class="modal-body no-p no-b">
+							<!-- <div class="animated fadeInUpShort"> -->
+							<div class="row my-3">
+								<div class="col-md-7  offset-md-2">
+									<form id="form-request" action="#">
+										<div class="card no-b  no-r">
+											<div class="card-body catalog-body">
+												<h5 class="card-title">CATALOG</h5>
+												<div class="form-row">
+													<div class="form-group col-12 m-0">
+														<label class="my-1 mr-2" for="inlineFormCustomSelectPref">Select
+															A Catalog Name</label> <select name="catalog"
+															class="custom-select my-1 mr-sm-2 form-control r-0 col-5 light s-12"
+															id="inlineFormCustomSelectPref">
+															<option selected="">Choose...</option>
+															<option value="Laptop">Laptop</option>
+															<option value="Monitor">Monitor</option>
+															<option value="Keyboard">Keyboard</option>
+															<option value="Mouse">Mouse</option>
+														</select>
+													</div>
+												</div>
+											</div>
+											<hr>
+											<div class="card-body">
+												<div class="form-row">
+
+													<div class="form-group col-12 m-0">
+														<label for="decription" class="col-form-label s-12">Content</label>
+														<textarea name="content"
+															class="form-control r-0 light s-12" id="content" rows="5"></textarea>
+													</div>
+												</div>
+
+											</div>
+											<hr>
+											<div class="card-body">
+												<span class="btn btn-primary btn-lg sendRequest"><i
+													class="icon-save mr-2"></i>Send Request</span>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+							<!-- </div>	 -->
+
+
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+		<!--/#app -->
+		<script th:src="@{/assets/js/app.js}"></script>
+		<script src="../static/js/change_password.js"
+			th:src="@{/assets/js/change_password.js}"></script>
+
+		<script type="text/javascript"
+			src="../static/js/jquery.serializejson.js"
+			th:src="@{/js/jquery.serializejson.js}"></script>
+		<script>
+			//to do change password
+
+			$('#checkPassword').click(function() {
+				var URL = "/my-profile/change-password";
+				var passwordForm = $('#demo-form2').serializeJSON();
+				console.log(passwordForm);
+				console.log("tu duong");
+
+				console.log("nguyen thi bai");
+				var jsonStringPassword = JSON.stringify(passwordForm);
+				console.log("///////////" + jsonStringPassword);
+
+				$.ajax({
+					url : "/my-profile/change-password",
+					type : 'PUT',
+					contentType : "application/json; charset=utf-8",
+					data : jsonStringPassword,
+					dataType : 'json',
+					complete : function(res) {
+						console.log("tu viet van11111111111");
+						console.log(res.status);
+						if (res.status === 200 || res.status === 201) {
+							$('.msg-error').fadeIn(1000);
+							$('.msg-error').addClass('btn-success');
+							$('.msg-error').text('Update Password Success!');
+							$('.msg-error').css('background-color', 'green');
+							setTimeout(function() {
+								$('.msg-error').fadeOut(1000);
+							}, 8000);
+						} else if (res.status === 409 || res.status === 400) {
+							console.log("van dep trai");
+							console.log(res.responseText);
+							$('.msg-error').fadeIn(1000);
+							$('.msg-error').addClass('btn-danger');
+							$('.msg-error').text(res.responseText);
+							$('.msg-error').css('background-color', '#2979ff')
+							setTimeout(function() {
+								$('.msg-error').fadeOut(1000);
+							}, 8000);
+						}
+					}
+
+				});
+
+			});
+		</script>
+</body>
+</html>

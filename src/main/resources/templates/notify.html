@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" th:href="@{/assets/img/basic/favicon.ico}" type="image/x-icon">
+    <title>Paper</title>
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/assets/css/app.css}">
+<link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+    <style>
+        .loader {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #F5F8FA;
+            z-index: 9998;
+            text-align: center;
+        }
+
+        .plane-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+        }
+        .table-hover>tbody>tr:hover>td, .table-hover>tbody>tr:hover>th {
+	background-color: #428bca;
+	color: #eeeeee;
+}
+    </style>
+</head>
+<body class="light">
+<!-- Pre loader -->
+<div id="loader" class="loader">
+    <div class="plane-container">
+        <div class="preloader-wrapper small active">
+            <div class="spinner-layer spinner-blue">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div><div class="gap-patch">
+                <div class="circle"></div>
+            </div><div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+            </div>
+
+            <div class="spinner-layer spinner-red">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div><div class="gap-patch">
+                <div class="circle"></div>
+            </div><div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+            </div>
+
+            <div class="spinner-layer spinner-yellow">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div><div class="gap-patch">
+                <div class="circle"></div>
+            </div><div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+            </div>
+
+            <div class="spinner-layer spinner-green">
+                <div class="circle-clipper left">
+                    <div class="circle"></div>
+                </div><div class="gap-patch">
+                <div class="circle"></div>
+            </div><div class="circle-clipper right">
+                <div class="circle"></div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="app">
+<aside id="left-content" class="main-sidebar fixed offcanvas shadow">
+
+</aside>
+<!--Sidebar End-->
+<div class="has-sidebar-left">
+  <div id="top-content"></div> 
+</div>
+   
+</div>
+<div class="has-sidebar-left">
+    <header class="blue accent-3 relative nav-sticky">
+        <div class="container-fluid text-white">     
+            <div class="row">			
+                <ul class="nav nav-material nav-material-white responsive-tab" id="v-pending" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active"  id="v-pills-pending-tab" href="#v-pills-pending" data-toggle="pill" role="tab" 	aria-controls="v-pills-pending" aria-selected="false" ><i class="icon icon-list"></i>Pending</a>
+                    </li>
+                    <li class="nav-item">
+                    	<a class="nav-link" id="v-pills-history-tab" data-toggle="pill" href="#v-pills-history" role="tab"
+										aria-controls="v-pills-history" aria-selected="false"><i
+											class="icon icon-cog"></i>History</a></li>
+           
+                    <!-- <li class="nav-item"> -->
+                        <!-- <a class="nav-link" href="#modalCreateMessage" data-toggle="modal" -->
+                           <!-- data-target="#modalCreateMessage"><i class="icon icon-trash-can"></i>Trash</a> -->
+                    <!-- </li> -->
+                </ul>
+            </div>
+        </div>
+    </header>
+
+
+    <div class="container-fluid animatedParent animateOnce p-0">
+        <div class="animated fadeInUpShort">
+<div class="tab-content" id="v-pills-tabContent">
+								<div class="tab-pane fade show active" id="v-pills-pending"
+									role="tabpanel" aria-labelledby="v-pills-pending-tab">
+			  <div class="row my-3">
+                    <div class="col-md-12">
+                        <div class="card r-0 shadow">
+                            <div class="table-responsive">
+                                <form id="filters-request">
+                                    <table class="table-pending table table-striped table-hover r-0">
+                                        <thead>
+                                        <tr class="no-b">
+                                      <!--        <th style="width: 30px">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" id="checkedAll" class="custom-control-input"><label
+                                                        class="custom-control-label" for="checkedAll"></label>
+                                                </div>
+                                            </th>-->
+                                            <th>USER NAME</th>
+                                        
+                                            <th>TEAM</th>
+                                            <th>DATE UPDATE</th>
+                                      
+                                            <th>REQUEST INFO</th>
+                                            <th></th>
+                                        </tr>
+                                        <tr class="filters"> 
+                        <th><input id="filter-fullname" name="fullname" type="text" class="form-control typeahead" placeholder=""></th>
+                        <th><input id="filter-team" name="team" type="text" class="form-control" placeholder=""></th>
+                        <th><input id="filter-updatedate" name="updatedate" type="text" class="form-control" placeholder=""></th>
+                        <th><input id="filter-type" name="type" type="text" class="form-control" placeholder=""></th>
+                    </tr>
+                                        </thead>
+                                        <tbody class="tablerequest">
+                                      <!--    <tr>
+                                            <td>
+                                                <div class=\"avatar avatar-md mr-3 mt-1 float-left\">
+                                                    <span class=\"avatar-letter avatar-letter-a  avatar-md circle\"></span>
+                                                </div>
+                                                <div><div><strong>"+request.fullname+"</strong>
+                                                    </div><small>"+request.email+"</small></div>
+                                            </td>        
+                                            <td>"+request.email+"</td><td><span>
+                                    <i class=\"icon icon-data_usage\"></i>"+dayago+"</span><br><span>
+                                    <i class="icon icon-timer"></i>"+request.updatedate+"</span>
+                                        </td>
+                                            <td> <a href="#modalCreateMessage" data-toggle="modal"
+       data-target="#modalCreateMessage" ><span class="r-3 badge badge-warning ">"+request.type+"</span></a></td>
+                                          <td hidden="">"+request.id+"</td>
+                                           <td hidden="">"+request.content+"</td>
+                                        </tr> -->
+                                       
+                                   
+
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <nav class="my-3" aria-label="Page navigation">
+							   <ul id="pagination-pending" class="pagination"></ul>
+						</nav>
+						<button class="btn btn-primary l-s-1 s-12 text-uppercase">
+							Delete</button>
+					
+               </div>
+               
+               						<div class="tab-pane fade show" id="v-pills-history"
+									role="tabpanel" aria-labelledby="v-pills-history-tab">
+			  <div class="row my-3">
+                    <div class="col-md-12">
+                        <div class="card r-0 shadow">
+                            <div class="table-responsive">
+                                <form id="filters-history">
+                                    <table class="table-history table table-striped table-hover r-0">
+                                        <thead>
+                                        <tr class="no-b">
+                                      <!--        <th style="width: 30px">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" id="checkedAll" class="custom-control-input"><label
+                                                        class="custom-control-label" for="checkedAll"></label>
+                                                </div>
+                                            </th>-->
+                                            <th>USER NAME</th>
+                                            <th>TEAM</th>
+                                            <th>DATE UPDATE</th>
+                                            <th>REQUEST INFO</th>
+                                            <th></th>
+                                        </tr>
+                                        <tr class="filters"> 
+                        <th><input id="filter-fullname-his" name="fullname" type="text" class="form-control typeahead" placeholder=""></th>
+                        <th><input id="filter-team-his" name="team" type="text" class="form-control" placeholder=""></th>
+                        <th><input id="filter-updatedate-his" name="updatedate" type="text" class="form-control" placeholder=""></th>
+                        <th><input id="filter-type-his" name="type" type="text" class="form-control" placeholder=""></th>
+                    </tr>
+                                        </thead>
+                                        <tbody class="tablehistory">
+                                      <!--    <tr>
+                                            <td>
+                                                <div class=\"avatar avatar-md mr-3 mt-1 float-left\">
+                                                    <span class=\"avatar-letter avatar-letter-a  avatar-md circle\"></span>
+                                                </div>
+                                                <div><div><strong>"+request.fullname+"</strong>
+                                                    </div><small>"+request.email+"</small></div>
+                                            </td>        
+                                            <td>"+request.email+"</td><td><span>
+                                    <i class=\"icon icon-data_usage\"></i>"+dayago+"</span><br><span>
+                                    <i class="icon icon-timer"></i>"+request.updatedate+"</span>
+                                        </td>
+                                            <td> <a href="#modalCreateMessage" data-toggle="modal"
+       data-target="#modalCreateMessage" ><span class="r-3 badge badge-warning ">"+request.type+"</span></a></td>
+                                          <td hidden="">"+request.id+"</td>
+                                           <td hidden="">"+request.content+"</td>
+                                        </tr> -->
+                                       
+                                   
+
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+                     <nav class="my-3" aria-label="Page navigation">
+							   <ul id="pagination-history" class="pagination"></ul>
+						</nav>
+						<button class="btn btn-primary l-s-1 s-12 text-uppercase">
+							Delete</button>
+               </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Add New Message Fab Button-->
+
+</div>
+<!--device Modal-->
+<div class="modaldevice modal fade  pl-5 ml-5" id="modalCreateMessage" tabindex="-1" role="dialog" aria-labelledby="modalCreateMessage">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content b-0">
+            <div class="modal-header r-0 bg-primary">
+                <h6 class="modal-title text-white" id="exampleModalLabel">REQUEST DETAILS</h6>
+                <a href="#" data-dismiss="modal" aria-label="Close"
+                   class="paper-nav-toggle paper-nav-white active"><i></i></a>
+            </div>
+                <!--Message Start-->
+                        <div class="card b-0  m-2">
+                        
+                        
+   <div class="modal-body card-body infoprofile" hidden="">
+
+     <div class="stepper sw-main sw-theme-circles sw-theme-sw-theme-circles" id="smartwizard" data-options="{
+                                     &quot;useURLhash&quot;:true,
+                                     &quot;theme&quot;:&quot;sw-theme-circles&quot;,
+                                     &quot;transitionEffect&quot;:&quot;fade&quot;,
+                                     &quot;toolbarSettings&quot;:{
+                                         &quot;showNextButton&quot;:false,
+                                         &quot;showPreviousButton&quot;:false
+                                         }
+                                     }">
+                            <ul class="nav step-anchor nav-tabs">
+                                <li class="nav-item done"><a href="#step-1y" class="nav-link">Request Detail</a></li>                           
+                                  <li class="nav-item done"><a href="#step-2y" class="nav-link">Reply</a></li>
+                            </ul>
+                            <div class="card no-b shadow sw-container tab-content" style="min-height: 212px;">
+                              <div id="step-1y" class="card-body text-center p-5 tab-pane step-content" style="display: block;">
+                                 <h5 class="card-title text-uppercase col-md-5">Profile Info</h5>
+																<div class="form-row">
+																
+																			<div class="col-md-3 offset-md-1">
+																		<input hidden="" id="file" name="file">
+																		<div class="dz-image"><img class="data-avatar" data-dz-thumbnail="" alt="" src="/images/1.jpg"></div> 
+																		<div class="dropzone dropzone-file-area pt-4 pb-4 dz-clickable" id="fileUpload" hidden="hidden">
+
+																			<div class="dz-default dz-message ">
+																				<span>Drop A passport size image of user</span>
+																				<div>You can also click to open file browser</div>
+																			</div>
+
+																		
+																		</div>
+
+																	</div>
+																	<div class="col-md-8">
+																		<div class="form-group m-0">
+																			<input hidden="" name="id" placeholder="id" class="form-control r-0 light s-12 idM1" type="number">
+																		</div>
+
+																		<div class="form-group m-0">
+																			<label for="name" class="col-form-label s-12 ">EMPLOYEE
+																				NAME</label> <input  name="fullname" placeholder="Enter User Name" class="form-control r-0 light s-12 fullnameM1" type="text" disabled>
+																		</div>
+
+																		<div class="form-row">
+																			<div class="form-group col-6 m-0">
+																				<label for="cnic" class="col-form-label s-12 "><i class="icon-fingerprint"></i>TEAM</label> <input id="cnic" name="team" placeholder="Enter Team Joined" class="form-control r-0 light s-12 date-picker teamM1" type="text" disabled>
+																			</div>
+
+
+																			<div class="form-group col-6 m-0">
+																				<label for="dob" class="col-form-label s-12 "><i class="icon-calendar mr-2"></i>DATE OF BIRTH</label> <input id="dob" name="birthDay" placeholder="Select Date of Birth" class="form-control r-0 light s-12 date-time-picker birthDayM1" type="text" data-options="{&quot;timepicker&quot;:false, &quot;format&quot;:&quot;Y-m-d&quot;}" value="" disabled>
+
+																			</div>
+																		</div>
+
+																		<div class="form-group m-0">
+																			<label for="dob" class="col-form-label s-12 ">GENDER</label>
+																			<br>
+																			<div class="custom-control custom-radio custom-control-inline">
+																				<input type="radio" id="male" name="genderM" class="custom-control-input genderM" disabled> <label class="custom-control-label m-0 " for="male">Male</label>
+																			</div>
+																			<div class="custom-control custom-radio custom-control-inline">
+																				<input type="radio" id="female" name="genderF" class="custom-control-input genderF" disabled> <label class="custom-control-label m-0 " for="female">Female</label>
+																			</div>
+																		</div>
+																	</div>
+														
+
+																</div>
+
+																<div class="form-row mt-1">
+																	<div class="form-group col-6 m-0">
+																		<label for="email" class="col-form-label s-12"><i class="icon-envelope-o mr-2"></i>Email</label> <input  name="email" placeholder="user@email.com" class="form-control r-0 light s-12 emailM1" type="text" disabled>
+																	</div>
+
+																	<div class="form-group col-6 m-0">
+																		<label for="phone" class="col-form-label s-12"><i class="icon-phone mr-2"></i>Phone</label> <input  name="phone" placeholder="05112345678" class="form-control r-0 light s-12 phoneM1" type="text" disabled>
+																	</div>
+
+
+																</div>
+																<div class="form-row">
+																	<div class="form-group col-12 m-0">
+																		<label for="address" class="col-form-label s-12">Address</label>
+																		<input type="text" name="address" class="form-control r-0 light s-12 addressM1"  placeholder="Enter Address" disabled>
+																	</div>
+																</div>
+                           
+                                </div>
+                               <div id="step-2y" class="card-body text-center tab-pane step-content" style="display: block;">
+                                   <textarea name="content" class="contentarea form-control r-0 light s-12" id="contentI" rows="8">Your info has been updated!</textarea>
+                                </div>
+                      
+                                
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        
+                        
+																
+					</div>
+					
+					   <div class="modal-body card-body modalreturn" hidden="">
+
+     <div class="stepper sw-main sw-theme-circles sw-theme-sw-theme-circles" id="smartwizard-return" data-options="{
+                                     &quot;useURLhash&quot;:true,
+                                     &quot;theme&quot;:&quot;sw-theme-circles&quot;,
+                                     &quot;transitionEffect&quot;:&quot;fade&quot;,
+                                     &quot;toolbarSettings&quot;:{
+                                         &quot;showNextButton&quot;:false,
+                                         &quot;showPreviousButton&quot;:false
+                                         }
+                                     }">
+                            <ul class="nav step-anchor nav-tabs">
+                                <li class="nav-item done"><a href="#step-1y" class="nav-link">Request Detail</a></li>                           
+                                  <li class="nav-item done"><a href="#step-2y" class="nav-link">Reply</a></li>
+                            </ul>
+                            <div class="card no-b shadow sw-container tab-content" style="min-height: 212px;">
+                              <div id="step-1y" class="card-body text-center p-5 tab-pane step-content" style="display: block;">
+                                        <h3 class="my-3">
+                             <div class="card-body">
+                                <div data-toggle="collapse" data-target="#message2">
+                                    <div class="media">
+                                        <img class="d-flex mr-3 height-50" th:src="@{/assets/img/dummy/u3.png}" alt="Generic placeholder image">
+                                        <div class="media-body">
+                                        
+                                		 <h4 id="idR" class="mt-0 mb-1 font-weight-normal idM2" hidden="">Doe Joe</h4>
+                                            <h4 class="mt-0 mb-1 font-weight-normal fullnameM2">Doe Joe</h4>
+                                            <span id="emailR" class="emailM2">Message sent via your Market profile</span>
+                                            <br>
+                                            <small class="datetimeM2">Mon 9/18/2017, 9:54 PM</small>
+                                            <div class="collapse my-3 show" id="message2">
+                                                <div>
+                                                    <p class="teamM2">Hello John,</p>
+                                                    <hr>
+                                                    
+                                                    <!-- content -->
+                                                    <p class="content1M2"></p>
+                                                    <p class="content2M2"></p>
+                                                </div>
+                                            
+                                            </div>
+                                          
+                                        </div>
+                                    </div>
+                                </div>  
+                                    </h3>
+                           
+                                </div>
+                               <div id="step-2y" class="card-body text-center tab-pane step-content" style="display: block;">
+                                   <textarea name="content" class="contentarea form-control r-0 light s-12" id="contentR" rows="8" hidden="">Your device refund request is accepted</textarea>
+                                </div>
+                      
+                                
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        
+                        
+																
+					</div>
+					
+					
+					
+                                        <div class="card-body modalallo" hidden="">
+                        <div class="stepper sw-main sw-theme-circles sw-theme-sw-theme-circles" id="smartwizardA" data-options="{
+                                     &quot;useURLhash&quot;:true,
+                                     &quot;theme&quot;:&quot;sw-theme-circles&quot;,
+                                     &quot;transitionEffect&quot;:&quot;fade&quot;,
+                                     &quot;toolbarSettings&quot;:{
+                                         &quot;showNextButton&quot;:false,
+                                         &quot;showPreviousButton&quot;:false
+                                         }
+                                     }">
+                            <ul class="nav step-anchor nav-tabs">
+                                <li class="nav-item done"><a href="#step-1y" class="nav-link">Request Detail</a></li>
+                                <li class="nav-item done"><a href="#step-2y" class="nav-link">Choose Device</a></li>
+                                  <li class="nav-item done"><a  href="#step-3y" class="nav-link step3 ">Reply</a></li>
+                            </ul>
+                            <div class="card no-b sw-container tab-content" style="min-height: 212px;">
+                                <div id="step-1y" class="card-body  p-5 tab-pane step-content" style="display: none;">
+                                    <h3 class="my-3">
+                             <div class="card-body">
+                                <div data-toggle="collapse" data-target="#message2">
+                                    <div class="media">
+                                        <img class="d-flex mr-3 height-50" th:src="@{/assets/img/dummy/u3.png}" alt="Generic placeholder image">
+                                        <div class="media-body">
+                                        
+                                		 <h4 id="idA" class="mt-0 mb-1 font-weight-normal idM2" hidden="">Doe Joe</h4>
+                                            <h4 class="mt-0 mb-1 font-weight-normal fullnameM2">Doe Joe</h4>
+                                            <span id="emailA" class="emailM2">Message sent via your Market profile</span>
+                                            <br>
+                                            <small class="datetimeM2">Mon 9/18/2017, 9:54 PM</small>
+                                            <div class="collapse my-3 show" id="message2">
+                                                <div>
+                                                    <p class="teamM2">Hello John,</p>
+                                                    <hr>
+                                                    
+                                                    <!-- content -->
+                                                    <p class="content1M2"></p>
+                                                    <p class="content2M2"></p>
+                                                </div>
+                                            
+                                            </div>
+                                          
+                                        </div>
+                                    </div>
+                                </div>
+                    
+                          
+                     
+                               
+                                    </h3>
+                          
+                                </div>
+                               <div id="step-2y" class="card-body tab-pane step-content">
+                                <h2>Search Device</h2>
+                    <div id="form-step-1" role="form" data-toggle="validator">
+                        <div class="form-group focused">
+                            <input type="text" class="form-control typeahead" name="search" id="auto-search-device" placeholder="search with info: device name or catalog" required="">
+                            <div class="help-block with-errors text-danger"></div>
+                        </div>
+                    </div>
+                              <!--  <form id="autocomplete-form">
+	<div class="form-row">
+		
+			<h2>Search Device</h2>
+			<input type="text" name="txtdevice" id="txtdevice" placeholder="Search Device Name Or Catalog" class="form-control-lg is-invalid typeahead" required>	
+			<div class="invalid-feedback">Please fill a keyword search </div>
+	
+	</div>
+
+                                   </form>  -->                    	
+                                   	<div class="card r-0 shadow">
+                            <div class="table-responsive">
+                                <div role="alert" class="alertdevice alert alert-warning" hidden=""><strong>Warning!</strong> ------Not found device!--------
+            </div>
+                                    <table id="tablefilter" class="table table-striped table-hover r-0" hidden="">
+                                        <thead>
+                                        <tr class="no-b">
+                                            <th> </th>
+                                            <th>Device Name</th>
+                                            <th>Product Id</th>
+                                            <th>Update Date</th>       
+											<th>Choose</th>  											
+                                       
+                                        </tr>
+                                        </thead>
+
+                                        <tbody class="tablefilter">
+											
+                                      <!--   		<tr>
+                                           		 <td>  
+                                           		                                       
+                                                   <input type="checkbox" class="custom-control-input checkSingle" id="idDetail" required=""><label class="custom-control-label" for="user_id_1"></label>                                
+                                           		 
+                                           		 </td>
+
+                                           		 <td>
+                                                	<div class="icon icon-laptop_mac s-36 mr-3 mt-1 float-left">    
+                                               		 </div>                                         
+                                                    <div>
+                                                        <strong class ="nameDevice">Dell Vostro</strong>
+                                                    </div>
+                                            	</td>
+                                           		 <td class ="productId">2</td>										
+												<td>	
+												<a href="#step-3y"><span class="badge badge-success">Details</span></a></td>
+                                       		 </tr>
+                                       		 --> 
+                                        
+
+                                        </tbody>
+                                    </table>
+                                    
+                            </div>
+                        </div>
+
+                                </div>
+                         <div id="step-3y" class="card-body text-center tab-pane step-content" style="display: block;">
+                                   <textarea name="content" class="contentarea form-control r-0 light s-12" id="contentA" rows="8" hidden="">Your device allocation request is </textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <!-- button -->
+                        <hr>
+                 
+                
+                    <div class="row-type row ">
+                       <div class="col-12">
+                          <a class=" approveda" href="#step-2y">
+                <span  class="btn btn-primary btn-lg float-right mr-2 approved">
+                        <i class="icon icon-cloud-download  "></i> APPROVED
+                      </span></a>
+                        <a class=" denya" href="#step-2y">
+                <button type="button" class="btn btn-danger btn-lg mr-3 float-right deny"><i class="icon icon-credit-card"></i> DENY
+                      </button></a>
+                        <a class=" replya" href="#step-2y">
+                <span  class="btn btn-warning btn-lg float-right mr-2 reply">
+                        <i class="icon icon-cloud-download  "></i> REPLY
+                      </span></a>
+                       </div>
+                         </div>
+                            <div class="row-submit row " hidden="">
+                       <div class="col-12">
+                         <a class="" >
+                <button type="button" class="submit btn btn-success btn-lg mr-3 float-right"><i class="icon icon-credit-card"></i> SUBMIT
+                      </button></a>
+                              <a class="" href="#step-1y">
+                <button type="button" class="btn btn-dark btn-lg float-right mr-2 back">
+                        <i class="icon icon-cloud-download"></i> BACK
+                      </button></a>
+                      
+                       </div>
+                         </div>
+                              <div class="row-next row " hidden="">
+                       <div class="col-12">
+                     
+                <button type="button" class="next btn btn-success btn-lg mr-3 float-right"><i class="icon icon-credit-card"></i> NEXT
+                      </button>
+                              <a class="" href="#step-1y">
+                <button type="button" class="btn btn-dark btn-lg float-right mr-2 back">
+                        <i class="icon icon-cloud-download"></i> BACK
+                      </button></a>
+                      
+                       </div>
+                         </div>
+       <button class="toast-cancel btn btn-success btn-lg toast-action"
+        data-title="Notification"
+        data-message="Request Canceled"
+        data-type="success"
+        data-position-class="toast-bottom-left" hidden="">
+    Success Toast</button>
+    
+    <button class="toast-approve btn btn-primary btn-lg toast-action"
+        data-title="Notification"
+        data-message="Request Approved"
+        data-type="error"
+        data-position-class="toast-bottom-left" hidden="">
+    Error Toast</button>
+    <button class="toast-reply btn btn-warning btn-lg toast-action"
+        data-title="Notification"
+        data-message="Request Replied"
+        data-type="warning"
+        data-position-class="toast-bottom-left" hidden="">
+    Success Toast</button>
+    
+            </div>
+     
+    </div>
+</div>
+<!-- Right Sidebar -->
+
+<!-- /.right-sidebar -->
+<!-- Add the sidebar's background. This div must be placed
+         immediately after the control sidebar -->
+<div class="control-sidebar-bg shadow white fixed"></div>
+</div>
+<!--/#app -->
+<script th:src="@{/assets/js/app.js}"></script>
+<script th:src="@{/assets/js/jquery.timeago.min.js}"></script>
+<script th:src="@{/assets/js/typeahead.js}"></script>
+<script th:src="@{/assets/js/moment.min.js}"></script>
+<script th:src="@{/assets/js/jquery.serializejson.min.js}"></script>
+<script th:src="@{/assets/js/validator.min.js}"></script>
+<script th:src="@{/assets/js/jquery.validate.min.js}"></script>
+<script th:src="@{/assets/js/jquery.twbsPagination.min.js}"></script>
+<script th:src="@{/assets/js/bootstrap.min.js}"></script>    
+<script type="text/javascript" src="/assets/js/admin-home2.js"></script>
+ <script th:src="@{/assets/js/notify.js}"></script>
+</body>
+</html>

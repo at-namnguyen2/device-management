@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" th:href="@{/assets/img/basic/favicon.ico}"
+	type="image/x-icon">
+<title>Paper</title>
+<!-- CSS -->
+<link rel="stylesheet" th:href="@{/assets/css/app.css}">
+<link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+<style>
+.loader {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #F5F8FA;
+	z-index: 9998;
+	text-align: center;
+}
+
+.plane-container {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+}
+
+.table-hover>tbody>tr:hover>td, .table-hover>tbody>tr:hover>th {
+	background-color: #428bca;
+	color: #eeeeee;
+}
+</style>
+</head>
+<body class="light">
+	<!-- Pre loader -->
+	<div id="loader" class="loader">
+		<div class="plane-container">
+			<div class="preloader-wrapper small active">
+				<div class="spinner-layer spinner-blue">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+				</div>
+
+				<div class="spinner-layer spinner-red">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+				</div>
+
+				<div class="spinner-layer spinner-yellow">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+				</div>
+
+				<div class="spinner-layer spinner-green">
+					<div class="circle-clipper left">
+						<div class="circle"></div>
+					</div>
+					<div class="gap-patch">
+						<div class="circle"></div>
+					</div>
+					<div class="circle-clipper right">
+						<div class="circle"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="app">
+		<aside id="left-content" class="main-sidebar fixed offcanvas shadow">
+			<!-- ---------------- -->
+
+
+		</aside>
+		<!--Sidebar End-->
+		<div class="has-sidebar-left">
+			<div class="pos-f-t">
+				<div class="collapse" id="navbarToggleExternalContent">
+					<div class="bg-dark pt-2 pb-2 pl-4 pr-2">
+						<div class="search-bar">
+							<input
+								class="transparent s-24 text-white b-0 font-weight-lighter w-128 height-50"
+								type="text" placeholder="start typing...">
+						</div>
+						<a href="#" data-toggle="collapse"
+							data-target="#navbarToggleExternalContent" aria-expanded="false"
+							aria-label="Toggle navigation"
+							class="paper-nav-toggle paper-nav-white active "><i></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="sticky">
+				<div
+					class="navbar navbar-expand navbar-dark d-flex justify-content-between bd-navbar blue accent-3">
+					<div class="relative">
+						<a href="#" data-toggle="offcanvas"
+							class="paper-nav-toggle pp-nav-toggle"> <i></i>
+						</a>
+					</div>
+					<!--Top Menu Start -->
+					<div class="navbar-custom-menu p-t-10">
+						<ul class="nav navbar-nav">
+
+							<!-- Notifications -->
+							<li class="dropdown custom-dropdown notifications-menu"><a
+								href="#" class=" nav-link" data-toggle="dropdown"
+								aria-expanded="false"> <i class="icon-notifications "></i> <span
+									class="badge badge-danger badge-mini rounded-circle">4</span>
+							</a>
+								<ul class="dropdown-menu">
+									<li class="header">You have 10 notifications</li>
+									<li>
+										<!-- inner menu: contains the actual data -->
+										<ul class="menu">
+											<li><a href="#"> <i
+													class="icon icon-data_usage text-success"></i> 5 new
+													members joined today
+											</a></li>
+											<li><a href="#"> <i
+													class="icon icon-data_usage text-danger"></i> 5 new members
+													joined today
+											</a></li>
+											<li><a href="#"> <i
+													class="icon icon-data_usage text-yellow"></i> 5 new members
+													joined today
+											</a></li>
+										</ul>
+									</li>
+									<li class="footer p-2 text-center"><a href="#">View
+											all</a></li>
+								</ul></li>
+							<li><a class="nav-link " data-toggle="collapse"
+								data-target="#navbarToggleExternalContent"
+								aria-controls="navbarToggleExternalContent"
+								aria-expanded="false" aria-label="Toggle navigation"> <i
+									class=" icon-search3 "></i>
+							</a></li>
+
+							<!-- User Account-->
+							<!-- User Account-->
+							<li class="dropdown custom-dropdown user user-menu"><a
+								href="#" class="nav-link" data-toggle="dropdown"> <img
+									th:src="@{/assets/img/dummy/u6.png}" class="user-image"
+									alt="User Image"> <i class="icon-more_vert "></i>
+							</a>
+								<div class="dropdown-menu p-4">
+									<div class="row box justify-content-between my-4">
+
+										<div class="col">
+											<a href="#"> <i
+												class="icon-beach_access pink lighten-1 avatar  r-5"></i>
+												<div class="pt-1">Profile</div>
+											</a>
+										</div>
+										<div class="col">
+											<a href="#"> <i
+												class="icon-security purple lighten-2 avatar  r-5"></i>
+												<div class="pt-1">Change Password</div>
+											</a>
+										</div>
+										<div class="col">
+											<a href="#"> <i
+												class="icon-perm_data_setting indigo lighten-2 avatar  r-5"></i>
+												<div class="pt-1">Logout</div>
+											</a>
+										</div>
+									</div>
+								</div></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="page  has-sidebar-left height-full">
+			<header class="blue accent-3 relative">
+				<div class="container-fluid text-white">
+					<div class="row p-t-b-10 ">
+						<div class="col">
+							<h4>
+								<i class="icon-database"></i> Allocation - Return Devices
+							</h4>
+						</div>
+					</div>
+					<div class="row justify-content-between">
+						<ul class="nav nav-material nav-material-white responsive-tab"
+							id="v-pills-tab" role="tablist">
+							<li><a class="nav-link active" id="v-pills-all-tab"
+								data-toggle="pill" href="#v-pills-all" role="tab"
+								aria-controls="v-pills-all"><i class="icon icon-home2"></i>Allocation</a>
+							</li>
+							<li><a class="nav-link" id="devices-history"
+								data-toggle="pill" href="#devices-deliver-receive" role="tab"
+								aria-controls="devices-deliver-receive"><i
+									class="icon icon-face"></i>Return</a></li>
+							<!-- <li> -->
+							<!-- <a class="nav-link" id="v-pills-sellers-tab" data-toggle="pill" href="#v-pills-sellers" role="tab" -->
+							<!-- aria-controls="v-pills-sellers"><i class="icon  icon-local_shipping"></i> Sellers</a> -->
+							<!-- </li> -->
+							
+						</ul>
+					</div>
+				</div>
+			</header>
+			<div class="container-fluid animatedParent animateOnce">
+				<div class="tab-content my-3" id="v-pills-tabContent">
+					<div class="tab-pane animated fadeInUpShort active"
+						id="v-pills-all" role="tabpanel" aria-labelledby="v-pills-all-tab">
+						<div class="row my-3">
+							<div class="col-md-12">
+								<div class="card r-0 shadow">
+									<div class="table-responsive">
+										<form id="filters-allocation">
+											<table  class="table table-striped table-hover r-0">
+												<thead>
+													<tr class="no-b">
+														<th></th>
+														<th colspan="2">Employee Name</th>
+														<th>Team</th>
+														<th>Device Name</th>
+														<th>Product ID</th>
+														<th>Date Allocation</th>
+														<th></th>
+
+													</tr>
+													 <tr class="filters"> 
+													 <th style="width: 30px">
+															<div class="custom-control custom-checkbox">
+																<input type="checkbox" id="checkedAll"
+																	class="custom-control-input"><label
+																	class="custom-control-label" for="checkedAll"></label>
+															</div>
+														</th>
+                        <th colspan="2"><input id="filter-employeeName" name="employeeName" type="text" class="form-control typeahead" placeholder=""></th>
+                        <th><input id="filter-team" name="team" type="text" class="form-control" placeholder=""></th>
+                        <th><input id="filter-deviceName" name="deviceName" type="text" class="form-control" placeholder=""></th>
+                        <th><input id="filter-productId" name="productId" type="text" class="form-control" placeholder=""></th>
+                        <th><input id="filter-dateAllocation" name="dateDeliverReceive" type="text" class="form-control" placeholder=""></th>
+                    </tr>
+												</thead>
+
+												<tbody id="tbAllo">
+												
+												</tbody>
+											</table>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+   
+						<nav class="my-3" aria-label="Page navigation">
+							   <ul id="pagination-allo" class="pagination"></ul>
+						</nav>
+
+
+						<button class="btn btn-primary l-s-1 s-12 text-uppercase">
+							Delete</button>
+					</div>
+					<div class="tab-pane animated fadeInUpShort show "
+						id="devices-deliver-receive" role="tabpanel"
+						aria-labelledby="devices-deliver-receive-tab">
+
+
+
+						<div class="row my-3">
+							<div class="col-md-12">
+								<div class="card r-0 shadow">
+
+									<div class="table-responsive">
+										<form id="filters-return">
+											<table class="table table-striped table-hover r-0">
+												<thead class="">
+													<tr>
+														<th></th>
+														<th colspan="2">Employee Name</th>
+														<th>Team</th>
+														<th>Device Name</th>
+														<th>Product ID</th>
+														<th>Date Allocation</th>
+														<th></th>
+													</tr>
+													<th style="width: 30px">
+															<div class="custom-control custom-checkbox">
+																<input type="checkbox" id="checkedAll"
+																	class="custom-control-input"><label
+																	class="custom-control-label" for="checkedAll"></label>
+															</div>
+													</th>
+													
+						<th colspan="2"><input id="filter-employeeName-his" name="employeeName" type="text" class="form-control typeahead" placeholder=""></th>
+                        <th><input id="filter-team-his" name="team" type="text" class="form-control" placeholder=""></th>
+                        <th><input id="filter-deviceName-his" name="deviceName" type="text" class="form-control" placeholder=""></th>
+                        <th><input id="filter-productId-his" name="productId" type="text" class="form-control" placeholder=""></th>
+                        <th><input id="filter-dateAllocation-his" name="dateDeliverReceive" type="text" class="form-control" placeholder=""></th>
+												</thead>
+												<tbody id="table-history">
+													<tr>
+														<td class="w-10"><a href="panel-page-profile.html"
+															class="avatar avatar-lg"> <img
+																th:src="@{/assets/img/dummy/u9.png}" alt="">
+														</a></td>
+														<td>
+															<h6>Sara Kamzoon</h6> <small class="text-muted">Java
+																Team</small>
+														</td>
+														<td>Logitech LO18815</td>
+														<td>L018815-022603</td>
+														<td>05-09-2018</td>
+														<td><span class="badge badge-success">Deliver</span></td>
+														<td><a href="panel-page-profile.html"><i
+																class="icon-eye mr-3"></i></a> <a href="#modaladddevicesdr"><i
+																class="icon-pencil mr-3"></i></a> <a href="#step-22"><i
+																class="icon-delete"></i></a></td>
+													</tr>
+												
+												
+												
+												</tbody>
+											</table>
+										</form>
+									</div>
+
+
+								</div>
+							</div>
+						</div>
+						<nav class="my-3" aria-label="Page navigation">
+							   <ul id="pagination-return" class="pagination"></ul>
+						</nav>
+						<button class="btn btn-primary l-s-1 s-12 text-uppercase">
+							Delete</button>
+					
+
+					</div>
+				
+				
+				</div>
+			</div>
+					<a href="addModal" data-toggle="modal"
+							data-target="#addModal"
+							class="btn-fab btn-fab-md fab-right fab-right-bottom-fixed shadow btn-primary"><i
+							class="icon-add"></i></a>
+			
+		</div>
+		<!-- Right Sidebar -->
+		<aside class="control-sidebar fixed white ">
+			<div class="slimScroll">
+				<div class="sidebar-header">
+					<h4>Activity List</h4>
+					<a href="#" data-toggle="control-sidebar"
+						class="paper-nav-toggle  active"><i></i></a>
+				</div>
+				<div class="p-3">
+					<div>
+						<div class="my-3">
+							<small>25% Complete</small>
+							<div class="progress" style="height: 3px;">
+								<div class="progress-bar bg-success" role="progressbar"
+									style="width: 25%;" aria-valuenow="25" aria-valuemin="0"
+									aria-valuemax="100"></div>
+							</div>
+						</div>
+						<div class="my-3">
+							<small>45% Complete</small>
+							<div class="progress" style="height: 3px;">
+								<div class="progress-bar bg-info" role="progressbar"
+									style="width: 45%;" aria-valuenow="45" aria-valuemin="0"
+									aria-valuemax="100"></div>
+							</div>
+						</div>
+						<div class="my-3">
+							<small>60% Complete</small> `
+							<div class="progress" style="height: 3px;">
+								<div class="progress-bar bg-warning" role="progressbar"
+									style="width: 60%;" aria-valuenow="60" aria-valuemin="0"
+									aria-valuemax="100"></div>
+							</div>
+						</div>
+						<div class="my-3">
+							<small>75% Complete</small>
+							<div class="progress" style="height: 3px;">
+								<div class="progress-bar bg-danger" role="progressbar"
+									style="width: 75%;" aria-valuenow="75" aria-valuemin="0"
+									aria-valuemax="100"></div>
+							</div>
+						</div>
+						<div class="my-3">
+							<small>100% Complete</small>
+							<div class="progress" style="height: 3px;">
+								<div class="progress-bar" role="progressbar"
+									style="width: 100%;" aria-valuenow="100" aria-valuemin="0"
+									aria-valuemax="100"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="p-3 bg-primary text-white">
+					<div class="row">
+						<div class="col-md-6">
+							<h5 class="font-weight-normal s-14">Sodium</h5>
+							<span class="font-weight-lighter text-primary">Spark Bar</span>
+							<div>
+								Oxygen <span class="text-primary"> <i
+									class="icon icon-arrow_downward"></i> 67%
+								</span>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<canvas width="100" height="70" data-chart="spark"
+								data-chart-type="bar"
+								data-dataset="[[28,68,41,43,96,45,100,28,68,41,43,96,45,100,28,68,41,43,96,45,100,28,68,41,43,96,45,100]]"
+								data-labels="['a','b','c','d','e','f','g','h','i','j','k','l','m','n','a','b','c','d','e','f','g','h','i','j','k','l','m','n']">
+                    </canvas>
+						</div>
+					</div>
+				</div>
+				<div class="table-responsive">
+					<table id="recent-orders"
+						class="table table-hover mb-0 ps-container ps-theme-default">
+						<tbody>
+							<tr>
+								<td><a href="#">INV-281281</a></td>
+								<td><span class="badge badge-success">Paid</span></td>
+								<td>$ 1228.28</td>
+							</tr>
+							<tr>
+								<td><a href="#">INV-01112</a></td>
+								<td><span class="badge badge-warning">Overdue</span></td>
+								<td>$ 5685.28</td>
+							</tr>
+							<tr>
+								<td><a href="#">INV-281012</a></td>
+								<td><span class="badge badge-success">Paid</span></td>
+								<td>$ 152.28</td>
+							</tr>
+							<tr>
+								<td><a href="#">INV-01112</a></td>
+								<td><span class="badge badge-warning">Overdue</span></td>
+								<td>$ 5685.28</td>
+							</tr>
+							<tr>
+								<td><a href="#">INV-281012</a></td>
+								<td><span class="badge badge-success">Paid</span></td>
+								<td>$ 152.28</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="sidebar-header">
+					<h4>Activity</h4>
+					<a href="#" data-toggle="control-sidebar"
+						class="paper-nav-toggle  active"><i></i></a>
+				</div>
+				<div class="p-4">
+					<div class="activity-item activity-primary">
+						<div class="activity-content">
+							<small class="text-muted"> <i
+								class="icon icon-user position-left"></i> 5 mins ago
+							</small>
+							<p>Lorem ipsum dolor sit amet conse ctetur which ascing elit
+								users.</p>
+						</div>
+					</div>
+					<div class="activity-item activity-danger">
+						<div class="activity-content">
+							<small class="text-muted"> <i
+								class="icon icon-user position-left"></i> 8 mins ago
+							</small>
+							<p>Lorem ipsum dolor sit ametcon the sectetur that ascing
+								elit users.</p>
+						</div>
+					</div>
+					<div class="activity-item activity-success">
+						<div class="activity-content">
+							<small class="text-muted"> <i
+								class="icon icon-user position-left"></i> 10 mins ago
+							</small>
+							<p>Lorem ipsum dolor sit amet cons the ecte tur and adip
+								ascing elit users.</p>
+						</div>
+					</div>
+					<div class="activity-item activity-warning">
+						<div class="activity-content">
+							<small class="text-muted"> <i
+								class="icon icon-user position-left"></i> 12 mins ago
+							</small>
+							<p>Lorem ipsum dolor sit amet consec tetur adip ascing elit
+								users.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</aside>
+		<!-- /.right-sidebar -->
+
+		     <!-- Modal -->
+      <div class="modal fade  pl-5 ml-5" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header bg-primary">
+              <h5 class="modal-title text-white" id="exampleModalLabel">Smart Wizard modal</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+             <form action="#" id="myForm" role="form" data-toggle="validator" method="post" accept-charset="utf-8">
+
+        <!-- SmartWizard html -->
+        <div class="sw-theme-circles sw-theme-sw-theme-circles" id="smartwizard">
+            <ul>
+                <li><a href="#step-1">Select Employee<br /><small></small></a></li>
+                <li><a href="#step-2">Select Deivce<br /><small></small></a></li>
+                <li><a href="#step-3">Select Request<br /><small></small></a></li>
+                <li><a href="#step-4">Confirm<br /><small></small></a></li>
+            </ul>
+
+            <div>
+                <div id="step-1">
+                    <h2>Search Employee </h2>
+                    <div id="form-step-0" role="form" data-toggle="validator">
+                        <div class="form-group">
+                       
+                            <input type="text" class="form-control typeahead" name="search" id="auto-search-employee" placeholder="search with info: email, name, team" required>
+                            <div class="help-block with-errors text-danger"></div>
+                        </div>
+                    </div>
+
+				  	<div class="card r-0 shadow">
+                            <div class="table-responsive">
+                          
+                                <div role="alert" class="alertEmployee alert alert-warning" hidden=""><strong>Warning!</strong> ------Not found device!--------
+            </div>
+                                    <table id="tablefilter-emp" class="table table-striped table-hover r-0" hidden="">
+                                        <thead>
+                                        <tr class="no-b">
+											<th></th>                                        
+                                            <th>USER NAME</th>
+                                            <th>TEAM</th>
+                                            <th>PHONE</th>       
+                                        </tr>
+                                        </thead>
+
+                                        <tbody class="tablefilter-emp">
+											                           
+
+                                        </tbody>
+                                    </table>
+                              
+                            </div>
+                        </div>                
+                </div>
+                <div id="step-2">
+                    <h2>Search Device</h2>
+                    <div id="form-step-1" role="form" data-toggle="validator">
+                        <div class="form-group">
+                            <input type="text" class="form-control typeahead" name="search" id="auto-search-device" placeholder="search with info: device name or catalog" required>
+                            <div class="help-block with-errors text-danger"></div>
+                        </div>
+                    </div>
+                      	<div class="card r-0 shadow">
+                            <div class="table-responsive">
+                          
+                                <div role="alert" class="alertEmployee alert alert-warning" hidden=""><strong>Warning!</strong> ------Not found device!--------
+            </div>
+                                    <table id="tablefilter-device" class="table table-striped table-hover r-0" hidden="">
+                                        <thead>
+                                        <tr class="no-b">
+											<th></th>                                        
+                                            <th>Device Name</th>
+                                            <th>Product ID</th>
+                                            <th>Update Date</th>       
+                                        </tr>
+                                        </thead>
+
+                                        <tbody class="tablefilter-device">
+
+                                        </tbody>
+                                    </table>
+                            </div>
+                        </div>        
+                </div>
+                <div id="step-3">
+                    	<div class="card r-0 shadow">
+                            <div class="table-responsive">
+                          
+                              
+                                    <table id="tablefilter-request" class="table table-striped table-hover r-0">
+                                        <thead>
+                                        <tr class="no-b">    
+                                                <th></th>                                  
+                                            <th>DATE UPDATE</th>
+                                            <th>CONTENT</th>                                         
+                                        </tr>
+                                        </thead>
+
+                                        <tbody class="tablefilter-request">
+
+                                        </tbody>
+                                    </table>
+                            </div>
+                        </div> 
+                    
+                </div>
+                <div id="step-4" class="">
+                    <h2>Confirm Allocation Device </h2>
+                    <p>
+
+                    </p>
+                    <div id="form-step-3" role="form" data-toggle="validator">
+                        <div class="form-group">
+                            <label for="terms">I agree with the T&C</label>
+                            <input type="checkbox" id="terms" data-error="Please accept the Terms and Conditions" required>
+                            <div class="help-block with-errors text-danger"></div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        </form>       
+            </div>
+ 
+          </div>
+        </div>
+      </div>
+    
+
+
+		<!--Message Modal add devices -->
+		<div class="modal fade  pl-5 ml-5" id="modaladddevices" tabindex="-1"
+			role="dialog" aria-labelledby="modaladddevices">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content b-0">
+					<div class="modal-header r-0 bg-primary">
+						<h6 class="modal-title text-white" id="exampleModalLabel">New
+							Devices</h6>
+						<a href="#" data-dismiss="modal" aria-label="Close"
+							class="paper-nav-toggle paper-nav-white active"><i></i></a>
+					</div>
+					<div class="modal-body ">
+						<!-- <div class="animated fadeInUpShort"> -->
+						   <div class="stepper sw-main sw-theme-circles sw-theme-sw-theme-circles" id="smartwizardA" data-options="{
+                                     &quot;useURLhash&quot;:true,
+                                     &quot;theme&quot;:&quot;sw-theme-circles&quot;,
+                                     &quot;transitionEffect&quot;:&quot;fade&quot;,
+                                     &quot;toolbarSettings&quot;:{
+                                         &quot;showNextButton&quot;:false,
+                                         &quot;showPreviousButton&quot;:false
+                                         }
+                                     }">
+                            <ul class="nav step-anchor nav-tabs">
+                                <li class="nav-item done"><a href="#step-1y" class="nav-link">Select Employee</a></li>
+                                <li class="nav-item done"><a href="#step-2y" class="nav-link">Choose Device</a></li>
+                                  <li class="nav-item done"><a  href="#step-3y" class="nav-link step3 ">Reply</a></li>
+                            </ul>
+                            <div class="card no-b shadow sw-container tab-content" style="min-height: 212px;">
+                                <div id="step-1y" class="card-body  p-5 tab-pane step-content" style="display: none;">
+              <form id="needs-validation" novalidate>
+                <div class="row">
+                    <div class="col-md-8 ">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom01">Product Name</label>
+                                <input type="text" class="form-control" id="validationCustom01"
+                                       placeholder="Product Name" value="Apple Iphone 8" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom02">Product Brand</label>
+                                <input type="text" class="form-control" id="validationCustom02" placeholder="Last name"
+                                       value="Apple" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="category">Category</label>
+                                <!--<input type="text" class="form-control"  placeholder="Mobile Phones" required>-->
+                                <select id="category" class="custom-select form-control" required>
+                                    <option value="">Select Product Category</option>
+                                    <option value="1">Mobile Phone</option>
+                                    <option value="2">Laptop & Computers</option>
+                                    <option value="3">Accessories</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Please provide a valid category.
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="validationCustom04">Price</label>
+                                <input type="text" class="form-control" id="validationCustom04" placeholder="$ 250"
+                                       required>
+                                <div class="invalid-feedback">
+                                    Please provide a valid price.
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="sku">SKU</label>
+                                <input type="text" class="form-control" id="sku" placeholder="sku-1029-5998" required>
+                                <div class="invalid-feedback">
+                                    Please provide a valid sku.
+                                </div>
+                            </div>
+                        </div>
+                   
+              
+                        <script>
+                            // Example starter JavaScript for disabling form submissions if there are invalid fields
+                            (function () {
+                                "use strict";
+                                window.addEventListener("load", function () {
+                                    var form = document.getElementById("needs-validation");
+                                    form.addEventListener("submit", function (event) {
+                                        if (form.checkValidity() == false) {
+                                            event.preventDefault();
+                                            event.stopPropagation();
+                                        }
+                                        form.classList.add("was-validated");
+                                  
+
+                                    }, false);
+                                }, false);
+                            }());
+                        </script>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="card mt-4">
+                            <h6 class="card-header white">Publish Box</h6>
+                            <div class="card-body text-success">
+
+                                <div class="custom-control custom-checkbox mb-3">
+                                    <input type="checkbox" class="custom-control-input" id="customControlValidation1" required>
+                                    <label class="custom-control-label" for="customControlValidation1">Check this custom checkbox</label>
+                                    <div class="invalid-feedback">Example invalid feedback text</div>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-transparent">
+                                <button class="btn btn-primary" type="submit">Publish</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+                                </div>
+                               <div id="step-2y" class="card-body tab-pane step-content">
+       				       <form id="autocomplete-form">
+	<div class="form-row">
+		
+			<label for="txtdevice">Search Device Not Used</label> 
+			<input type="text" name="txtdevice" id="txtdevice" placeholder="Search Device Name Or Catalog" class="form-control-lg is-invalid typeahead" required>	
+			<div class="invalid-feedback">Please fill a keyword search </div>
+	
+	</div>
+
+                                   </form>                     	
+                                   	<div class="card r-0 shadow">
+                            <div class="table-responsive">
+                                <form id="filter-form">
+                                <div role="alert" class="alertdevice alert alert-warning" hidden=""><strong>Warning!</strong> ------Not found device!--------
+            </div>
+                                    <table id="tablefilter" class="table table-striped table-hover r-0" hidden="">
+                                        <thead>
+                                        <tr class="no-b">
+                                            <th style="width: 30px">
+                                                <div class="custom-control custom-checkbox">
+                                           
+                                                    <input name="idDetail" type="checkbox" id="checkedAll" class="custom-control-input" required><label class="custom-control-label" for="checkedAll"></label>
+                                             
+                                                </div>
+                                            </th>
+                                            <th>Device Name</th>
+                                            <th>Product Id</th>
+                                            <th>Update Date</th>       
+											<th>Choose</th>  											
+                                       
+                                        </tr>
+                                        </thead>
+
+                                        <tbody class="tablefilter">
+											
+                                      <!--   		<tr>
+                                           		 <td>  
+                                           		                                       
+                                                   <input type="checkbox" class="custom-control-input checkSingle" id="idDetail" required=""><label class="custom-control-label" for="user_id_1"></label>                                
+                                           		 
+                                           		 </td>
+
+                                           		 <td>
+                                                	<div class="icon icon-laptop_mac s-36 mr-3 mt-1 float-left">    
+                                               		 </div>                                         
+                                                    <div>
+                                                        <strong class ="nameDevice">Dell Vostro</strong>
+                                                    </div>
+                                            	</td>
+                                           		 <td class ="productId">2</td>										
+												<td>	
+												<a href="#step-3y"><span class="badge badge-success">Details</span></a></td>
+                                       		 </tr>
+                                       		 --> 
+                                        
+
+                                        </tbody>
+                                    </table>
+                                    
+                                </form>
+                            </div>
+                        </div>
+              			        
+                                </div>
+                         <div id="step-3y" class="card-body text-center tab-pane step-content" style="display: block;">
+                                   <textarea name="content" class="contentarea form-control r-0 light s-12" id="contentA" rows="8" hidden="">Your device allocation request is </textarea>
+                                </div>
+                            </div>
+                        </div>
+                        
+                               <hr>
+                 
+                
+                    <div class="row-type row mb-3">
+                       <div class="col-12">
+                          <a class=" approveda" href="#step-2y">
+                <span  class="btn btn-primary btn-lg float-right mr-2 approved">
+                        <i class="icon icon-cloud-download  "></i> APPROVED
+                      </span></a>
+                        <a class=" denya" href="#step-2y">
+                <button type="button" class="btn btn-danger btn-lg mr-3 float-right deny"><i class="icon icon-credit-card"></i> DENY
+                      </button></a>
+                        <a class=" replya" href="#step-2y">
+                <span  class="btn btn-warning btn-lg float-right mr-2 reply">
+                        <i class="icon icon-cloud-download  "></i> REPLY
+                      </span></a>
+                       </div>
+                         </div>
+						<!-- </div>	 -->
+
+
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<!-- end modal add device -->
+		<!-- start toast -->
+		  			<button class="toastEmp btn btn-danger btn-lg toast-action" data-title="Please select a employee !"
+                         data-message="" 
+                         data-type="error" data-position-class="toast-bottom-left"
+                         hidden="">Error Toast
+            </button>
+            <button class="toastDevice btn btn-danger btn-lg toast-action" data-title="Please select a device!"
+                         data-message="" 
+                         data-type="error" data-position-class="toast-bottom-left"
+                         hidden="">Error Toast
+            </button>
+            
+              			<button class="toastAllo-Return btn btn-success btn-lg toast-action" data-title="delete success !"
+                         data-message="" 
+                         data-type="error" data-position-class="toast-bottom-left"
+                         hidden="">Sucess Toast
+            </button>
+		<!-- end toast -->
+		<!-- Add the sidebar's background. This div must be placed
+         immediately after the control sidebar -->
+		<div class="control-sidebar-bg shadow white fixed"></div>
+	</div>
+	<!--/#app -->
+	<script th:src="@{/assets/js/app.js}"></script>
+	<script th:src="@{/assets/js/jquery.timeago.js}"></script>
+	<script th:src="@{/assets/js/typeahead.js}"></script>
+	<script th:src="@{/assets/js/moment.js}"></script>
+<script th:src="@{/assets/js/jquery.serializejson.min.js}"></script>
+	<script th:src="@{/assets/js/validator.min.js}"></script>
+	<script th:src="@{/assets/js/jquery.validate.min.js}"></script>
+		<script th:src="@{/assets/js/jquery.twbsPagination.min.js}"></script>
+				<script th:src="@{/assets/js/jquery.smartWizard.js}"></script>
+					<script th:src="@{/assets/js/popover.js}"></script>
+				<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+			<script th:src="@{/assets/js/bootstrap-confirmation.js}"></script>				
+					<script th:src="@{/assets/js/admin-home2.js}"></script>
+						<script th:src="@{/assets/js/allocation-return.js}"></script>
+						
+				  
+</body>
+</html>

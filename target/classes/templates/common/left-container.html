@@ -1,0 +1,63 @@
+ <section class="sidebar">
+        <div class="w-80px mt-3 mb-3 ml-3">
+            <img th:src="@{/assets/img/basic/logo.png}" alt="">
+        </div>
+        <div class="relative">
+          
+            <div class="user-panel p-3 light mb-2">
+                <div>
+                    <div class="float-left image">
+                        <img class="user_avatar data-avatar" th:src="@{/assets/img/dummy/u2.png}" alt="User Image">
+                    </div>
+                    <div class="float-left info">
+                        <h6 class="font-weight-light mt-2 mb-1 fullname"></h6>
+                        <a href="#"><i class="icon-circle text-primary blink"></i> Online</a>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+        <ul class="sidebar-menu">
+            <li class="header"><strong></strong></li>
+            <li class="treeview">
+            <a th:href="@{/admin}">
+                <i class="icon icon-sailing-boat-water purple-text s-18"></i> <span>Summary</span> 
+            </a>
+             
+            </li>
+          
+            <li class="treeview"><a th:href="@{/admin/userall}"><i class="icon icon-account_box light-green-text s-18"></i>Users</i></a>
+            </li>
+            
+              <li class="treeview"><a th:href="@{/admin/device}">
+                <i class="icon icon icon-package blue-text s-18"></i>
+                <span>Devices</span>
+                <span class="badge r-3 badge-primary pull-right"></span>
+            </a>
+            </li>
+            
+              <li class="treeview"><a th:href="@{/admin/allocationreturn}">
+                <i class="icon icon icon-package blue-text s-18"></i>
+                <span>Allocation - Return Devices</span>
+                <span class="badge r-3 badge-primary pull-right"></span>
+            </a>
+             <!--   <ul class="treeview-menu">
+                    <li><a href="panel-page-products.html"><i class="icon icon-circle-o"></i>All Products</a>
+                    </li>
+                    <li><a href="panel-page-products-create.html"><i class="icon icon-add"></i>Add
+                        New </a>
+                    </li>
+                </ul> -->	
+            </li>
+            <li class="treeview no-b"><a th:href="@{/admin/notify}">
+                <i class="icon icon-package light-green-text s-18"></i>
+                <span>Request</span>
+                <span class="badge r-3 badge-success pull-right"></span>
+            </a>
+
+            </li>
+            <li class="header light mt-3"><strong></strong></li>
+        </ul>
+    </section>
+    
+    	<script th:src="@{/assets/js/leftcontent.js}"></script>

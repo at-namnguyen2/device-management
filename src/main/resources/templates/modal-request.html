@@ -1,0 +1,113 @@
+<div class="modal fade show" id="modaladddevices" tabindex="-1" role="dialog" aria-labelledby="modaladddevices" style="display: block; padding-right: 15px;">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content b-0">
+            <div class="modal-header r-0 bg-primary">
+                <h6 class="modal-title text-white" id="exampleModalLabel">New Devices</h6>
+                <a href="#" data-dismiss="modal" aria-label="Close" class="paper-nav-toggle paper-nav-white active"><i></i></a>
+            </div>
+            <div class="modal-body no-p no-b">
+				 <!-- <div class="animated fadeInUpShort"> -->
+            <div class="row my-3">
+                <div class="col-md-7  offset-md-2">
+                    <form action="#">
+                        <div class="card no-b  no-r">
+                            <div class="card-body">
+                                <h5 class="card-title">CATALOG</h5>
+                                <div class="form-row">
+                                    <div class="form-group col-12 m-0">
+                                        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Select A Catalog Name</label>
+											  <div class="">
+                                        <select class="custom-select my-1 mr-sm-2 form-control r-0 col-5 light s-12" id="inlineFormCustomSelectPref">
+                                            <option selected="">Choose...</option>
+                                            <option value="1">Laptop</option>
+                                            <option value="2">Monitor</option>
+                                            <option value="3">Keyboard</option>
+											  <option value="4">Mouse</option>
+                                        </select>
+									
+									 <a href="#" class="btn btn-primary bg-primary btn-sm mt-2">Add New Catalog</a>
+									 </div>
+                                    </div>
+								
+                                </div>
+                               
+                            </div>
+							<hr>
+                            <div class="card-body">
+                                <h5 class="card-title">DEVICE</h5>
+                                <div class="form-row">
+                                    <div class="col-md-9">
+                                        <div class="form-group m-0">
+                                            <label for="name" class="col-form-label s-12">Device Name</label>
+                                            <input id="name" placeholder="Enter Device Name" class="form-control r-0 light s-12 " type="text">
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="form-group col-6 m-0">
+                                                <label for="cnic" class="col-form-label s-12"><i class="icon-fingerprint"></i>Price</label>
+                                                <input id="cnic" placeholder="Enter Price" class="form-control r-0 light s-12 date-picker" type="text">
+                                            </div>                               
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row mt-1">
+                                  
+
+                                    <div class="form-group col-12 m-0">
+                                    <label for="decription" class="col-form-label s-12">Decription</label>
+                                    <textarea class="form-control r-0 light s-12" id="decription" rows="3"></textarea>
+                                </div>
+
+                                </div>
+              
+                            </div>
+                            <hr>
+                            <div class="card-body">
+                                <h5 class="card-title">DEVICE DETAILS</h5>
+                                <div class="form-row">
+                                    <div class="form-group col-9 m-0">
+                                        <label for="roll1" class="col-form-label s-12">Product ID</label>
+                                        <input id="roll1" placeholder="Enter Product ID" class="form-control r-0 light s-12 " type="text">
+                                    </div>
+                             
+                                </div>
+								<div class="form-row">
+								  <div class="form-group m-0">
+                                            <label for="dob" class="col-form-label s-12">Status</label>
+                                            <br>
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="male" name="gender" class="custom-control-input" checked="">
+                                                <label class="custom-control-label m-0" for="male">normal</label>
+                                            </div>
+                                            <div class="custom-control custom-radio custom-control-inline">
+                                                <input type="radio" id="female" name="gender" class="custom-control-input">
+                                                <label class="custom-control-label m-0" for="female">break</label>
+                                            </div>
+                                        </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group col-4 m-0">
+                                        <label for="joining" class="col-form-label s-12"><i class="icon-calendar mr-2"></i>Date Update</label>
+                                        <input id="joining" placeholder="Date Update" class="form-control r-0 light s-12 datePicker" data-time-picker="false" data-format-date="Y/m/d" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                           
+                            <hr>
+                            <div class="card-body">
+                                <button type="submit" class="btn btn-primary btn-lg"><i class="icon-save mr-2"></i>Save Data</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    <!-- </div>	 -->
+                 
+              
+		
+            </div>
+         
+        </div>
+    </div>
+</div>
